@@ -1,0 +1,2 @@
+FLASK_APP=main
+FLASH_DEBUG=1
