@@ -8,7 +8,7 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
 
 
-class UserSchema(ma.Schema)
+class UserSchema(ma.Schema):
     class Meta:
         fields = ("id", "name", "email", "password")
 
