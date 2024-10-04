@@ -10,7 +10,7 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 
     movies = db.relationship('Movie', back_populates='user')
-    comments = db.relationship("Review", back_populates="user")
+    reviews = db.relationship("Review", back_populates="user")
 
 class UserSchema(ma.Schema):
     movies = fields.List(fields.Nested("MovieSchema", exclude=["user"]))

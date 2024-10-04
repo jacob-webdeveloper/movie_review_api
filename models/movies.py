@@ -13,7 +13,7 @@ class Movie(db.Model):
     # director_id = db.Column(db.String, db.ForeignKey("director.id"), nullable=False)
 
     user = db.relationship("User", back_populates="movies")
-    reviews = db.relationship("Review", back_populates="movies", cascade="all, delete")
+    reviews = db.relationship("Review", back_populates="movie", cascade="all, delete")
 
 
 class MovieSchema(ma.Schema):
@@ -21,6 +21,7 @@ class MovieSchema(ma.Schema):
     reviews = fields.List(fields.Nested("ReviewSchema", exclude=["movie"]))
     class Meta:
         fields = ("id", "movie_title", "release_year", "user", "reviews")#"genre_id", "director_id")
+        ordered = True
 
 movie_schema = MovieSchema()
 movies_schema = MovieSchema(many=True)
