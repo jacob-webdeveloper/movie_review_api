@@ -2,8 +2,10 @@ from flask import Blueprint, request
 from init import db
 from models.movies import Movie, movie_schema, movies_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from controllers.review_controller import reviews_bp
 
 movies_bp = Blueprint("movies", __name__, url_prefix="/movies")
+movies_bp.register_blueprint(reviews_bp)
 
 @movies_bp.route("/")
 def get_all_movies():
