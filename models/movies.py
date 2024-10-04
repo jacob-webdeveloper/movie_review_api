@@ -12,14 +12,15 @@ class Movie(db.Model):
     # genre_id = db.Column(db.String, db.ForeignKey("genre.id"), nullable=False)
     # director_id = db.Column(db.String, db.ForeignKey("director.id"), nullable=False)
 
-    user = db.relationship('User', back_populates='movies')
+    user = db.relationship("User", back_populates="movies")
+    reviews = db.relationship("Review", back_populates="movies", cascade="all, delete")
 
 
 class MovieSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=["id", "name", "email"])
-
+    reviews = fields.List(fields.Nested("ReviewSchema", exclude=["movie"]))
     class Meta:
-        fields = ("id", "movie_title", "release_year", "user")#"genre_id", "director_id")
+        fields = ("id", "movie_title", "release_year", "user", "reviews")#"genre_id", "director_id")
 
 movie_schema = MovieSchema()
 movies_schema = MovieSchema(many=True)

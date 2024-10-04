@@ -2,6 +2,7 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.movies import Movie
+from models.review import Review
 
 
 db_commands = Blueprint("db", __name__)

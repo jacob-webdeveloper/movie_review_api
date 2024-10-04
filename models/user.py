@@ -10,11 +10,13 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 
     movies = db.relationship('Movie', back_populates='user')
+    comments = db.relationship("Review", back_populates="user")
 
 class UserSchema(ma.Schema):
+    movies = fields.List(fields.Nested("MovieSchema", exclude=["user"]))
+    reviews = fields.List(fields.Nested("ReviewSchema", exclude=["user"]))
     class Meta:
-        movies = fields.List(fields.Nested('MovieSchema', exclude=["user"]))
-        fields = ("id", "name", "email", "password", "is_admin", "movies")
+        fields = ("id", "name", "email", "password", "is_admin", "movies", "reviews")
 
 # To handle a single user object
 user_schema = UserSchema(exclude=["password"])
