@@ -50,7 +50,29 @@ def seed_tables():
             # genre_id = genre[0]
             # directory_id = director[0]
         )]
-        
+    
+    reviews = [
+        Review(
+            user = users[0],
+            movie = movies[0],
+            rating = "4",
+            review = "this is the first review"
+        ),
+        Review(
+            user = users[0],
+            movie = movies[1],
+            rating = "3",
+            review = "This is the second review"
+        ),
+        Review(
+            user = users[0],
+            movie = movies[1],
+            rating = "3",
+            review = "This is the third review"
+        )
+    ]
+    
+    db.session.add_all(reviews)
     
     db.session.add_all(movies)
 
